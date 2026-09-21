@@ -4,25 +4,19 @@ import java.sql.Date;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Table;
- 
+import jakarta.persistence.*;
+
 /**
  * @author JavaSolutionsGuide
  *
  */
 @jakarta.persistence.Entity
-@Table(name="Employ")
+@Table(name="Employee")
 public class Employee {
   
  @Id
  @GeneratedValue(strategy= GenerationType.AUTO)
+ @Column(name="employeeid")
  private Long employeeId;
   
  @Column(name="First_Name")
@@ -33,14 +27,32 @@ public class Employee {
   
  @Column(name="Salary")
  private Double salary;
-  
- @ManyToOne
- @JoinColumn(name="deptId") 
- private Department department;
+
+    public String getGender() {
+        return gender;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
+    }
+
+    @Column(name="gender")
+    private String gender;
+
+// @ManyToOne(cascade = CascadeType.ALL)
+// @JoinColumn(name="Dept_Id")
+// private Department department;
+
+
+    //@ManyToOne(cascade = {CascadeType.MERGE, CascadeType.REFRESH}) -- working
+    // Do NOT include CascadeType.PERSIST or CascadeType.ALL here
+    @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.MERGE, CascadeType.REFRESH})
+    @JoinColumn(name = "deptid", nullable = false)
+    private Department department;
 
  
- @Column(name="Start_Date")
- private Date startDate;
+// @Column(name="Start_Date")
+// private Date startDate;
 
 
 
@@ -84,13 +96,13 @@ public void setSalary(Double salary) {
 //	this.departmentId = departmentId;
 //}
 
-public Date getStartDate() {
-	return startDate;
-}
-
-public void setStartDate(Date startDate) {
-	this.startDate = startDate;
-}
+//public Date getStartDate() {
+//	return startDate;
+//}
+//
+//public void setStartDate(Date startDate) {
+//	this.startDate = startDate;
+//}
 
 public Department getDepartment() {
 	return department;

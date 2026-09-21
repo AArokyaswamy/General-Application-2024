@@ -1,38 +1,49 @@
 package com.example.generalapplication.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name="Depart")
 public class Department {
-  
- @Id
+   @Id
  @GeneratedValue(strategy= GenerationType.AUTO)
+ @Column(name="deptid")
  private Long deptId;
   
- @Column(name="Dept_Name")
+ @Column(name="deptname")
  private String deptName;
 
-public Long getDeptId() {
-	return deptId;
-}
+    public Long getDeptId() {
+        return deptId;
+    }
 
-public void setDeptId(Long deptId) {
-	this.deptId = deptId;
-}
+    public void setDeptId(Long deptId) {
+        this.deptId = deptId;
+    }
 
-public String getDeptName() {
-	return deptName;
-}
+    public String getDeptName() {
+        return deptName;
+    }
 
-public void setDeptName(String deptName) {
-	this.deptName = deptName;
-}
- 
+    public void setDeptName(String deptName) {
+        this.deptName = deptName;
+    }
+
+//
+//    public List<Employee> getEmployees() {
+//        return employees;
+//    }
+//
+//    public void setEmployees(List<Employee> employees) {
+//        this.employees = employees;
+//    }
+
+//    // cascade = CascadeType.ALL ensures saving a department also saves its employees
+//    @OneToMany(mappedBy = "department", cascade = CascadeType.ALL, orphanRemoval = true)
+//    private List<Employee> employees = new ArrayList<>();
+
 
 }
