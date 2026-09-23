@@ -20,7 +20,7 @@ CREATE TABLE IF NOT EXISTS my_db.Employee (
     CONSTRAINT fk_employee_department
     FOREIGN KEY (deptid)
     REFERENCES depart(deptid)
-    ON DELETE SET NULL   -- Options: CASCADE, RESTRICT, SET NULL, or NO ACTION
+    ON DELETE SET NULL   
     ON UPDATE CASCADE
 
 );
